@@ -105,12 +105,6 @@ window.onload = () => {
 		Canvas.context = Canvas.getContext('2d');
 		Canvas.context.fillStyle = '#FAEBD7';
 		Canvas.context.fillRect(0, 0, width, height);
-		Canvas.context.fillStyle = '#322F2B';
-		Canvas.context.beginPath();
-		Canvas.context.arc((Maze.cellSize / 2), (Maze.cellSize / 2), (Maze.cellSize / 4), 0, 2 * Math.PI, true);
-		Canvas.context.arc(width - (Maze.cellSize / 2), height - (Maze.cellSize / 2), (Maze.cellSize / 4), 0, 2 * Math.PI, true);
-		Canvas.context.fill();
-		Canvas.context.closePath();
 		Canvas.context.fillStyle = '#645E56';
 		setTimeout(() => {
 			divide(Canvas.context, Maze, 0, 0, width, height, moves, 0);
