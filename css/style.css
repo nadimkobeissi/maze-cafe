@@ -6,7 +6,7 @@ body {
 }
 
 canvas {
-	margin: 20px auto;
+	margin: 10px auto 0 auto;
 	display: block;
 	border: 3px solid #645E56;
 	padding: 0px;

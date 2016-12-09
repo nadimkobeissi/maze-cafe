@@ -119,5 +119,10 @@ window.onload = () => {
 		}, 1000);
 	};
 
-	drawMaze(600, 600, 10);
+	let iw = window.innerWidth;
+	let ih = window.innerHeight;
+	while (iw % 10) { iw++ };
+	while (ih % 10) { ih++ };
+
+	drawMaze(iw - 40, ih - 40, 10);
 };
