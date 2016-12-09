@@ -104,8 +104,13 @@ window.onload = () => {
 		document.getElementsByTagName('body')[0].appendChild(Canvas);
 		Canvas.context = Canvas.getContext('2d');
 		Canvas.context.fillStyle = '#FAEBD7';
-		Canvas.context.lineWidth = 2;
 		Canvas.context.fillRect(0, 0, width, height);
+		Canvas.context.fillStyle = '#322F2B';
+		Canvas.context.beginPath();
+		Canvas.context.arc((Maze.cellSize / 2), (Maze.cellSize / 2), (Maze.cellSize / 4), 0, 2 * Math.PI, true);
+		Canvas.context.arc(width - (Maze.cellSize / 2), height - (Maze.cellSize / 2), (Maze.cellSize / 4), 0, 2 * Math.PI, true);
+		Canvas.context.fill();
+		Canvas.context.closePath();
 		Canvas.context.fillStyle = '#645E56';
 		setTimeout(() => {
 			divide(Canvas.context, Maze, 0, 0, width, height, moves, 0);
@@ -124,5 +129,5 @@ window.onload = () => {
 	while (iw % 10) { iw++ };
 	while (ih % 10) { ih++ };
 
-	drawMaze(iw - 40, ih - 40, 10);
+	drawMaze(iw - 35, ih - 35, 10);
 };
