@@ -74,24 +74,12 @@ window.onload = () => {
 		w = Math.round(w);
 		h = Math.round(h);
 		c = Math.round(c);
-		let c1 = c; let c2 = c;
-		while (
-			((w % c1) || (h % c1)) &&
-			((w % c2) || (h % c2))
-		)  {
-			c1++;
-			c2--;
-			if (
-				((w < c1) || (h < c1)) &&
-				(2 > c2)
-			) {
-				return false;
-			};
-		}
+		while (w % c) { w++ };
+		while (h % c) { h++ };
 		return {
 			width: w,
 			height: h,
-			cellSize: ((w % c1)? c2 : c1)
+			cellSize: c
 		};
 	};
 
@@ -99,15 +87,15 @@ window.onload = () => {
 		const Maze = newMaze(width, height, cell);
 		let Canvas = document.createElement('canvas');
 		let moves = [];
-		Canvas.setAttribute('width', width);
-		Canvas.setAttribute('height', height);
+		Canvas.setAttribute('width', Maze.width);
+		Canvas.setAttribute('height', Maze.height);
 		document.getElementsByTagName('body')[0].appendChild(Canvas);
 		Canvas.context = Canvas.getContext('2d');
 		Canvas.context.fillStyle = '#FAEBD7';
-		Canvas.context.fillRect(0, 0, width, height);
+		Canvas.context.fillRect(0, 0, Maze.width, Maze.height);
 		Canvas.context.fillStyle = '#645E56';
+		divide(Canvas.context, Maze, 0, 0, Maze.width, Maze.height, moves, 0);
 		setTimeout(() => {
-			divide(Canvas.context, Maze, 0, 0, width, height, moves, 0);
 			for (let m = 0; m < moves.length; m++) {
 				setTimeout(() => {
 					moves[m].forEach((p) => {
@@ -118,10 +106,5 @@ window.onload = () => {
 		}, 1000);
 	};
 
-	let iw = window.innerWidth;
-	let ih = window.innerHeight;
-	while (iw % 10) { iw++ };
-	while (ih % 10) { ih++ };
-
-	drawMaze(iw - 35, ih - 35, 10);
+	drawMaze(window.innerWidth - 30, window.innerHeight - 30, 15);
 };
