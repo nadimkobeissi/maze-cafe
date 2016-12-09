@@ -1,0 +1,61 @@
+@font-face {
+	font-family: 'Aller';
+	font-style: normal;
+	font-weight: 400;
+	src: url('../ttf/aller.ttf') format('ttf');
+}
+@font-face {
+	font-family: 'Aller';
+	font-weight: 700;
+	src: url('../ttf/allerBold.ttf') format('ttf');
+}
+@font-face {
+	font-family: 'Aller';
+	font-style: italic;
+	font-weight: 400;
+	src: url('../ttf/allerItalic.ttf') format('ttf');
+}
+@font-face {
+	font-family: 'Aller';
+	font-style: italic;
+	font-weight: 700;
+	src: url('../ttf/allerBoldItalic.woff') format('ttf');
+}
+@font-face {
+	font-family: 'Aller Light';
+	src: url('../ttf/allerLight.woff') format('ttf');
+}
+@font-face {
+	font-family: 'Aller Light';
+	font-style: italic;
+	src: url('../ttf/allerLightItalic.woff') format('ttf');
+}
+
+@font-face {
+	font-family: 'Geometria ExtraLight';
+	src: url('../otf/geometriaExtraLight.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	src: url('../woff/openSans.woff') format('woff');
+}
+@font-face {
+	font-family: 'Open Sans';
+	font-weight: 700;
+	src: url('../woff/openSansBold.woff') format('woff');
+}
+@font-face {
+	font-family: 'Open Sans';
+	font-style: italic;
+	font-weight: 400;
+	src: url('../woff/openSansItalic.woff') format('woff');
+}
+@font-face {
+	font-family: 'Open Sans';
+	font-style: italic;
+	font-weight: 700;
+	src: url('../woff/openSansBoldItalic.woff') format('woff');
+}
