@@ -1,5 +1,3 @@
-
-
 window.onload = () => {
 	'use strict';
 
@@ -109,14 +107,16 @@ window.onload = () => {
 		Canvas.context.lineWidth = 2;
 		Canvas.context.fillRect(0, 0, width, height);
 		Canvas.context.fillStyle = '#645E56';
-		divide(Canvas.context, Maze, 0, 0, width, height, moves, 0);
-		for (let m = 0; m < moves.length; m++) {
-			setTimeout(() => {
-				moves[m].forEach((p) => {
-					Canvas.context.fillRect(p[0], p[1], 3, 3);
-				});
-			}, m * 10);
-		};
+		setTimeout(() => {
+			divide(Canvas.context, Maze, 0, 0, width, height, moves, 0);
+			for (let m = 0; m < moves.length; m++) {
+				setTimeout(() => {
+					moves[m].forEach((p) => {
+						Canvas.context.fillRect(p[0], p[1], 3, 3);
+					});
+				}, m * 7);
+			};
+		}, 1000);
 	};
 
 	drawMaze(600, 600, 10);
