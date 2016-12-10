@@ -101,9 +101,9 @@ window.onload = () => {
 					moves[m].forEach((p) => {
 						Canvas.context.fillRect(p[0], p[1], 3, 3);
 					});
-				}, m * 5);
+				}, m * 3);
 			};
-		}, 1000);
+		}, 777);
 	};
 
 	drawMaze(window.innerWidth - 40, window.innerHeight - 40, 12);
