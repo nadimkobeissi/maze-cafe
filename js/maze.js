@@ -106,5 +106,5 @@ window.onload = () => {
 		}, 1000);
 	};
 
-	drawMaze(window.innerWidth - 30, window.innerHeight - 30, 12);
+	drawMaze(window.innerWidth - 40, window.innerHeight - 40, 12);
 };
