@@ -101,10 +101,10 @@ window.onload = () => {
 					moves[m].forEach((p) => {
 						Canvas.context.fillRect(p[0], p[1], 3, 3);
 					});
-				}, m * 7);
+				}, m * 5);
 			};
 		}, 1000);
 	};
 
-	drawMaze(window.innerWidth - 30, window.innerHeight - 30, 15);
+	drawMaze(window.innerWidth - 30, window.innerHeight - 30, 12);
 };
