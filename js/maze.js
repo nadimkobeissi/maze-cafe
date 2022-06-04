@@ -1,12 +1,12 @@
 const chooseVertical = (width, height) => {
 	if (width > height) {
-		return true;
+		return true
 	}
 	if (width < height) {
-		return false;
+		return false
 	}
-	return ((Math.floor(Math.random() * 2)) === 0);
-};
+	return ((Math.floor(Math.random() * 2)) === 0)
+}
 
 const chooseWallPosition = (c, w, h) => {
 	return {
@@ -17,9 +17,9 @@ const chooseWallPosition = (c, w, h) => {
 			Math.random() * ((h / c) - 1)
 		) * c
 	}
-};
+}
 
-const choosePassagePosition = (c, w, h) => {
+const chooseGapPosition = (c, w, h) => {
 	return {
 		width: Math.floor(
 			Math.random() * (w / c)
@@ -28,87 +28,88 @@ const choosePassagePosition = (c, w, h) => {
 			Math.random() * (h / c)
 		) * c
 	}
-};
+}
 
 const divide = (context, maze, x, y, width, height, moves, m) => {
-	let c = maze.cellSize;
+	let c = maze.cellSize
 	if ((width < c * 2) || (height < c * 2)) {
-		return false;
+		return false
 	}
-	let v = chooseVertical(width, height);
-	let cw = chooseWallPosition(c, width, height);
-	let cp = choosePassagePosition(c, width, height);
-	let wx = x + (v ? cw.width : 0);
-	let wy = y + (v ? 0 : cw.height);
-	let px = wx + (v ? 0 : cp.width);
-	let py = wy + (v ? cp.height : 0);
-	let dx = (v ? 0 : 1);
-	let dy = (v ? 1 : 0);
-	let len = (v ? height : width);
+	let v = chooseVertical(width, height)
+	let cw = chooseWallPosition(c, width, height)
+	let cp = chooseGapPosition(c, width, height)
+	let wx = x + (v ? cw.width : 0)
+	let wy = y + (v ? 0 : cw.height)
+	let px = wx + (v ? 0 : cp.width)
+	let py = wy + (v ? cp.height : 0)
+	let dx = (v ? 0 : 1)
+	let dy = (v ? 1 : 0)
+	let len = (v ? height : width)
 	for (let i = 0; i < len; i += 1) {
 		if (
 			((wx - px < 0) || (wx - px > c)) ||
 			((wy - py < 0) || (wy - py > c))
 		) {
-			Array.isArray(moves[m]) ? true : moves[m] = [];
-			moves[m].push([wx, wy]);
-			m++;
+			Array.isArray(moves[m]) ? true : moves[m] = []
+			moves[m].push([wx, wy])
+			m++
 		}
-		wx += dx;
-		wy += dy;
+		wx += dx
+		wy += dy
 	}
-	let nx = x;
-	let ny = y;
-	let w = (v ? (wx - x) : width);
-	let h = (v ? height : (wy - y));
-	divide(context, maze, nx, ny, w, h, moves, m);
-	nx = (v ? wx : x);
-	ny = (v ? y : wy);
-	w = (v ? (x + width - wx) : width);
-	h = (v ? height : y + height - wy);
-	divide(context, maze, nx, ny, w, h, moves, m);
-};
+	let nx = x
+	let ny = y
+	let w = (v ? (wx - x) : width)
+	let h = (v ? height : (wy - y))
+	divide(context, maze, nx, ny, w, h, moves, m)
+	nx = (v ? wx : x)
+	ny = (v ? y : wy)
+	w = (v ? (x + width - wx) : width)
+	h = (v ? height : y + height - wy)
+	divide(context, maze, nx, ny, w, h, moves, m)
+}
 
 const newMaze = (w, h, c) => {
-	w = Math.round(w);
-	h = Math.round(h);
-	c = Math.round(c);
+	w = Math.round(w)
+	h = Math.round(h)
+	c = Math.round(c)
 	while (w % c) {
 		w++
-	};
+	}
 	while (h % c) {
 		h++
-	};
+	}
 	return {
 		width: w,
 		height: h,
 		cellSize: c
-	};
-};
+	}
+}
 
-const drawMaze = (width, height, cell) => {
-	const Maze = newMaze(width, height, cell);
-	let Canvas = document.createElement('canvas');
-	let moves = [];
-	Canvas.setAttribute('width', Maze.width);
-	Canvas.setAttribute('height', Maze.height);
-	document.getElementsByTagName('body')[0].appendChild(Canvas);
-	Canvas.context = Canvas.getContext('2d');
-	Canvas.context.fillStyle = '#FAEBD7';
-	Canvas.context.fillRect(0, 0, Maze.width, Maze.height);
-	Canvas.context.fillStyle = '#645E56';
-	divide(Canvas.context, Maze, 0, 0, Maze.width, Maze.height, moves, 0);
+const drawMaze = (width, height, cell, speed) => {
+	const Maze = newMaze(width, height, cell)
+	let Canvas = document.createElement('canvas')
+	let strokeSize = Math.round(cell / 4)
+	let moves = []
+	Canvas.setAttribute('width', Maze.width)
+	Canvas.setAttribute('height', Maze.height)
+	document.getElementsByTagName('body')[0].appendChild(Canvas)
+	Canvas.context = Canvas.getContext('2d')
+	Canvas.context.fillStyle = '#FAEBD7'
+	Canvas.context.fillRect(0, 0, Maze.width, Maze.height)
+	Canvas.context.fillStyle = '#645E56'
+	divide(Canvas.context, Maze, 0, 0, Maze.width, Maze.height, moves, 0)
 	setTimeout(() => {
 		for (let m = 0; m < moves.length; m++) {
 			setTimeout(() => {
 				moves[m].forEach((p) => {
-					Canvas.context.fillRect(p[0], p[1], 3, 3);
-				});
-			}, m * 3);
-		};
-	}, 777);
-};
+					Canvas.context.fillRect(p[0], p[1], strokeSize, strokeSize)
+				})
+			}, m * speed)
+		}
+	}, 777)
+}
 
-window.onload = () => {
-	drawMaze(window.innerWidth - 40, window.innerHeight - 40, 12);
-};
+window.addEventListener('load', () => {
+	drawMaze(window.innerWidth - 20, window.innerHeight - 20, 8, 10)
+})
